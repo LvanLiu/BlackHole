@@ -1,6 +1,6 @@
 package com.lvan.blackhorespringcloudserviceconsumer.service.impl;
 
-import com.lvan.blackhorespringcloudserviceconsumer.feign.HelloWorldFeign;
+import com.lvan.blackhorespringcloudserviceconsumer.feign.ServiceProviderFeign;
 import com.lvan.blackhorespringcloudserviceconsumer.service.HelloWorldService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -15,13 +15,13 @@ import javax.annotation.Resource;
 public class HelloWorldServiceImpl implements HelloWorldService {
 
     @Resource
-    private HelloWorldFeign helloWorldFeign;
+    private ServiceProviderFeign serviceProviderFeign;
     @Resource
     private RestTemplate restTemplate;
 
     @Override
     public String restGetHelloWorldWithFeign() {
-        return helloWorldFeign.helloWorld();
+        return serviceProviderFeign.helloWorld();
     }
 
     @Override
