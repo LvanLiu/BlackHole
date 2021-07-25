@@ -14,9 +14,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>blackhole-web-sample</module>
         <module>blackhole-eureka-server-sample</module>
         <module>blackhole-spring-cloud-service-provider</module>
+        <module>blackhore-spring-cloud-service-consumer</module>
     </modules>
 
     <dependencyManagement>

@@ -47,6 +47,16 @@
             </dependency>
             <dependency>
                 <groupId>com.lvan</groupId>
+                <artifactId>blackhore-autoconfig-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lvan</groupId>
+                <artifactId>blackhore-starter-msql</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lvan</groupId>
                 <artifactId>blackhore-starter-test</artifactId>
                 <version>${project.version}</version>
             </dependency>

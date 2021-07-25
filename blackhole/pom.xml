@@ -17,6 +17,8 @@
         <module>starters/blackhole-starter-web</module>
         <module>starters/blackhole-starter-spring-cloud-eureka-server</module>
         <module>starters/blackhole-starter-spring-cloud-eureka-client</module>
+        <module>starters/blackhore-starter-msql</module>
+        <module>blackhore-autoconfig/blackhore-autoconfig-web</module>
         <module>starters/blackhore-starter-test</module>
     </modules>
 
