@@ -13,14 +13,18 @@
 
     <modules>
         <module>blackhole-dependencies</module>
+        <module>blackhole-core</module>
         <module>blackhole-web</module>
         <module>blackhole-mybatis</module>
+
         <module>blackhore-autoconfig/blackhore-autoconfig-web</module>
+
         <module>starters/blackhole-starter-web</module>
         <module>starters/blackhole-starter-spring-cloud-eureka-server</module>
         <module>starters/blackhole-starter-spring-cloud-eureka-client</module>
         <module>starters/blackhore-starter-msql</module>
         <module>starters/blackhole-starter-mybatis</module>
+        <module>starters/blackhole-starter-redis</module>
         <module>starters/blackhore-starter-test</module>
     </modules>
 
