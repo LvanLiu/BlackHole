@@ -2,33 +2,26 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.lvan</groupId>
-        <artifactId>blackhole-samples</artifactId>
+        <artifactId>blackhole-parent</artifactId>
         <version>1.0.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>blackhore-spring-cloud-service-consumer</artifactId>
+    <artifactId>blackhole-starter-skywalking</artifactId>
+    <packaging>pom</packaging>
 
     <dependencies>
-        <dependency>
-            <groupId>com.lvan</groupId>
-            <artifactId>blackhole-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.lvan</groupId>
-            <artifactId>blackhole-starter-spring-cloud-eureka-client</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.apache.skywalking</groupId>
             <artifactId>apm-toolkit-logback-1.x</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.lvan</groupId>
-            <artifactId>blackhore-starter-test</artifactId>
-            <scope>test</scope>
+            <groupId>org.apache.skywalking</groupId>
+            <artifactId>apm-toolkit-trace</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
-
 </project>

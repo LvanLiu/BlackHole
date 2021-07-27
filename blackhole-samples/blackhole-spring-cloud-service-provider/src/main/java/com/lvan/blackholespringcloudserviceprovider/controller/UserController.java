@@ -5,6 +5,7 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.lvan.blackholespringcloudserviceprovider.entity.User;
 import com.lvan.blackholespringcloudserviceprovider.mapper.UserMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import java.util.concurrent.TimeUnit;
  * @author Lvan
  * @since 2021/7/25
  */
+@Slf4j
 @RequestMapping("user")
 @RestController
 public class UserController {
@@ -29,6 +31,7 @@ public class UserController {
 
     @GetMapping("listAll")
     public List<User> listAllUsers() {
+        log.info("list All Users");
         List<User> userList = userMapper.selectList(Wrappers.emptyWrapper());
         if (CollUtil.isNotEmpty(userList)) {
             stringRedisTemplate.opsForValue().set("userList", JSONUtil.toJsonStr(userList), 5, TimeUnit.MINUTES);
