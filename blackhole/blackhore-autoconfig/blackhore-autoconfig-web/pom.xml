@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>com.lvan</groupId>
-            <artifactId>blackhole-starter-web</artifactId>
+            <artifactId>blackhole-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
