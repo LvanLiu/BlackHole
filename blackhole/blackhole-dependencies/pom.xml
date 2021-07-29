@@ -66,6 +66,11 @@
             </dependency>
             <dependency>
                 <groupId>com.lvan</groupId>
+                <artifactId>blackhole-test</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lvan</groupId>
                 <artifactId>blackhole-starter-web</artifactId>
                 <version>${project.version}</version>
             </dependency>

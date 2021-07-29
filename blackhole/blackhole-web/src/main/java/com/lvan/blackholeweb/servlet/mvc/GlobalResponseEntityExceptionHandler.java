@@ -10,5 +10,5 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
  * @since 2021/7/28
  */
 @RestControllerAdvice
-public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHandler {
+public class GlobalResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 }

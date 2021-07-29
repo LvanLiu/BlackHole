@@ -6,16 +6,15 @@
         <groupId>com.lvan</groupId>
         <artifactId>blackhole-parent</artifactId>
         <version>1.0.0</version>
-        <relativePath>../../pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>blackhore-starter-test</artifactId>
+    <artifactId>blackhole-test</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.lvan</groupId>
-            <artifactId>blackhole-test</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
     </dependencies>
-
 </project>
