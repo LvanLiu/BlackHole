@@ -1,7 +1,9 @@
 package com.lvan.blackholeweb.servlet.mvc;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 /**
  * 全局异常处理器。
@@ -10,5 +12,13 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
  * @since 2021/7/28
  */
 @RestControllerAdvice
-public class GlobalResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
+public class GlobalResponseEntityExceptionHandler {
+
+    /**
+     * 处理不支持此Http请求方法异常。
+     */
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    protected ResponseEntity<ErrorDetail> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex) {
+        return null;
+    }
 }
