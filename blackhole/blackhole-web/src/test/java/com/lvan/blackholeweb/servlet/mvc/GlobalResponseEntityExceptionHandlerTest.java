@@ -14,7 +14,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,10 +44,11 @@ class GlobalResponseEntityExceptionHandlerTest {
     }
 
     @Test
-    void name() throws Exception {
+    void getPersonById_whenMissingPersonId_expectIsBadRequest() throws Exception {
 
-        MvcResult mvcResult = mockMvc.perform(get("/person/")).andReturn();
-        System.out.println(mvcResult.getResponse().getContentAsString());
+        mockMvc.perform(get("/person/"))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andDo(MockMvcResultHandlers.print());
     }
 
     @ComponentScan(basePackages = "com.lvan.blackholeweb.servlet")
