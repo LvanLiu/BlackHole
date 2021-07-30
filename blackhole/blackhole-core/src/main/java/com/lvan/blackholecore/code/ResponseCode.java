@@ -11,7 +11,7 @@ public interface ResponseCode {
     /**
      * 获取响应码。
      */
-    String getCode();
+    int getCode();
 
     /**
      * 获取返回信息。

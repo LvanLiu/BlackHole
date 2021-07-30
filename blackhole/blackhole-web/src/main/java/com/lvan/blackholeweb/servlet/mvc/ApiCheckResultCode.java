@@ -18,7 +18,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum ApiRequestCheckResultCode implements ResponseCode {
+public enum ApiCheckResultCode implements ResponseCode {
 
     HTTP_PARAMS_ERROR(1001, "参数校验失败"),
     HTTP_REQUEST_NOT_SUPPORTED(1002, "不支持此Http请求"),
