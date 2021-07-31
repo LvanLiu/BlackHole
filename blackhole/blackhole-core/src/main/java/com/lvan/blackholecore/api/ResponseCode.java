@@ -1,4 +1,4 @@
-package com.lvan.blackholecore.code;
+package com.lvan.blackholecore.api;
 
 /**
  * 响应码接口。

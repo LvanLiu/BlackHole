@@ -1,6 +1,6 @@
 package com.lvan.blackholeweb.servlet.mvc;
 
-import com.lvan.blackholecore.code.ResponseCode;
+import com.lvan.blackholecore.api.ResponseCode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.experimental.UtilityClass;

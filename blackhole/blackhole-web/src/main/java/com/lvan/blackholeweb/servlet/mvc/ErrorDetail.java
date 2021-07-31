@@ -1,7 +1,7 @@
 package com.lvan.blackholeweb.servlet.mvc;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.lvan.blackholecore.code.ResponseCode;
+import com.lvan.blackholecore.api.ResponseCode;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.experimental.Accessors;
