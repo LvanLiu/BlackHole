@@ -38,4 +38,18 @@ public class ApiCode {
         private final int code;
         private final String message;
     }
+
+    /**
+     * 业务处理码
+     */
+    @Getter
+    @AllArgsConstructor
+    public enum BizHandleCode implements ResponseCode {
+
+        SUCCESS(0, "成功");
+
+        private final int code;
+        private final String message;
+    }
+
 }

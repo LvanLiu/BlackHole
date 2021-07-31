@@ -167,11 +167,11 @@ class GlobalResponseEntityExceptionHandlerTest {
     @ComponentScan(basePackages = "com.lvan.blackholeweb.servlet")
     @Configuration(proxyBeanMethods = false)
     @MinimalWebConfiguration
-    static class TestConfiguration {
+    static class MiniApplication {
 
         // For manual testing
         static void main(String[] args) {
-            SpringApplication.run(TestConfiguration.class, args);
+            SpringApplication.run(MiniApplication.class, args);
         }
 
         @RequestMapping("ex")
