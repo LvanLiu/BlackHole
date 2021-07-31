@@ -14,22 +14,23 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.UnsupportedEncodingException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 /**
  * @author lvan
@@ -44,47 +45,118 @@ class GlobalResponseEntityExceptionHandlerTest {
 
     private MockMvc mockMvc;
 
+    private static Person mockPerson;
+
+    static {
+        mockPerson = mockPerson.builder()
+                .id(1)
+                .name("test")
+                .build();
+    }
+
     @BeforeEach
     void setup() {
         this.mockMvc = MockMvcEasyBuilder.buildMockMvc(wac);
     }
 
     @Test
-    void getPersonById_whenMissingPersonId_expectHttpStatusIsBadRequest() throws Exception {
+    void globalExceptionHandler_whenMissingServletRequestParameter_expectHttpStatusIsBadRequest() throws Exception {
 
-        mockMvc.perform(get("/person/"))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
-    void getPersonById_whenMissingPersonId_expectReturnCodeIsHttpParamsError() throws Exception {
-
-        ResultActions resultActions = mockMvc.perform(get("/person/"));
+        ResultActions resultActions = mockMvc.perform(get("/ex/missingServletRequestParameter"));
+        resultActions.andDo(MockMvcResultHandlers.print());
 
         ErrorDetail errorDetail = parseContentToErrorDetail(resultActions);
 
-        assertEquals(errorDetail.getCode(), ApiCheckResultCode.HTTP_PARAMS_ERROR.getCode());
+        resultActions.andExpect(MockMvcResultMatchers.status().isBadRequest());
+        assertEquals(errorDetail.getCode(), ApiCode.ApiCheckResultCode.HTTP_PARAMS_ERROR.getCode());
+    }
+
+    @Test
+    void globalExceptionHandler_whenMissingServletRequestPart_expectHttpStatusIsBadRequest() throws Exception {
+
+        ResultActions resultActions = mockMvc.perform(multipart("/ex/missingServletRequestPart"));
         resultActions.andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
-    void getPersonById_whenUsingWrongHttpMethod_expectHttpStatusIsMethodsNotAllowed() throws Exception {
-
-        mockMvc.perform(post("/person/"))
-                .andExpect(MockMvcResultMatchers.status().isMethodNotAllowed())
-                .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
-    void getPersonById_whenUsingWrongHttpMethod_expectReturnCodeIsHttpRequestNotSupported() throws Exception {
-
-        ResultActions resultActions = mockMvc.perform(post("/person/"));
 
         ErrorDetail errorDetail = parseContentToErrorDetail(resultActions);
 
-        assertEquals(errorDetail.getCode(), ApiCheckResultCode.HTTP_REQUEST_NOT_SUPPORTED.getCode());
+        resultActions.andExpect(MockMvcResultMatchers.status().isBadRequest());
+        assertEquals(errorDetail.getCode(), ApiCode.ApiCheckResultCode.HTTP_PARAMS_ERROR.getCode());
+    }
+
+    @Test
+    void globalExceptionHandler_whenHttpMessageNotReadable_expectHttpStatusIsBadRequest() throws Exception {
+
+        ResultActions resultActions = mockMvc.perform(post("/ex/httpMessageNotReadable")
+                .contentType(MediaType.APPLICATION_JSON));
         resultActions.andDo(MockMvcResultHandlers.print());
+
+        ErrorDetail errorDetail = parseContentToErrorDetail(resultActions);
+
+        resultActions.andExpect(MockMvcResultMatchers.status().isBadRequest());
+        assertEquals(errorDetail.getCode(), ApiCode.ApiCheckResultCode.HTTP_PARAMS_ERROR.getCode());
+    }
+
+    @Test
+    void globalExceptionHandler_whenMethodArgumentNotValid_expectHttpStatusIsBadRequest() throws Exception {
+
+        ResultActions resultActions = mockMvc.perform(post("/ex/methodArgumentNotValid")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JSONUtil.toJsonStr(new Person())));
+        resultActions.andDo(MockMvcResultHandlers.print());
+
+        ErrorDetail errorDetail = parseContentToErrorDetail(resultActions);
+
+        resultActions.andExpect(MockMvcResultMatchers.status().isBadRequest());
+        assertEquals(errorDetail.getCode(), ApiCode.ApiCheckResultCode.HTTP_PARAMS_ERROR.getCode());
+    }
+
+    @Test
+    void globalExceptionHandler_whenHttpRequestMethodNotSupported_expectHttpStatusIsMethodNotAllowed() throws Exception {
+
+        ResultActions resultActions = mockMvc.perform(post("/ex/httpRequestMethodNotSupported")
+                .contentType(MediaType.APPLICATION_JSON));
+        resultActions.andDo(MockMvcResultHandlers.print());
+
+        ErrorDetail errorDetail = parseContentToErrorDetail(resultActions);
+
+        resultActions.andExpect(MockMvcResultMatchers.status().isMethodNotAllowed());
+        assertEquals(errorDetail.getCode(), ApiCode.ApiCheckResultCode.HTTP_REQUEST_NOT_SUPPORTED.getCode());
+    }
+
+    @Test
+    void globalExceptionHandler_whenHttpMediaTypeNotSupported_expectHttpStatusIsUnsupportedMediaType() throws Exception {
+
+        ResultActions resultActions = mockMvc.perform(post("/ex/httpMediaType")
+                .contentType(MediaType.APPLICATION_XML));
+        resultActions.andDo(MockMvcResultHandlers.print());
+
+        ErrorDetail errorDetail = parseContentToErrorDetail(resultActions);
+
+        resultActions.andExpect(MockMvcResultMatchers.status().isUnsupportedMediaType());
+        assertEquals(errorDetail.getCode(), ApiCode.ApiCheckResultCode.HTTP_REQUEST_NOT_SUPPORTED.getCode());
+    }
+
+    @Test
+    void globalExceptionHandler_whenHttpMediaTypeNotAcceptable_expectHttpStatusIsMediaTypeNotAcceptable() throws Exception {
+
+        ResultActions resultActions = mockMvc.perform(post("/ex/httpMediaType")
+                .accept(MediaType.APPLICATION_XML)
+                .content(JSONUtil.toJsonStr(mockPerson))
+                .contentType(MediaType.APPLICATION_XML));
+        resultActions.andDo(MockMvcResultHandlers.print());
+        resultActions.andExpect(MockMvcResultMatchers.status().isNotAcceptable());
+    }
+
+    @Test
+    void globalExceptionHandler_whenThrowRuntimeException_expectHttpStatusIsSystemError() throws Exception {
+
+        ResultActions resultActions = mockMvc.perform(get("/ex/runtimeException"));
+        resultActions.andDo(MockMvcResultHandlers.print());
+
+        ErrorDetail errorDetail = parseContentToErrorDetail(resultActions);
+
+        resultActions.andExpect(MockMvcResultMatchers.status().isInternalServerError());
+        assertEquals(errorDetail.getCode(), ApiCode.SystemErrorCode.SYSTEM_ERROR.getCode());
     }
 
     private ErrorDetail parseContentToErrorDetail(ResultActions resultActions) throws UnsupportedEncodingException {
@@ -102,16 +174,37 @@ class GlobalResponseEntityExceptionHandlerTest {
             SpringApplication.run(TestConfiguration.class, args);
         }
 
-        @RequestMapping("/person")
+        @RequestMapping("ex")
         @RestController
-        public static class PersonController {
+        public static class GlobalExceptionTestController {
 
-            @GetMapping("/")
-            public Person getPersonById(@RequestParam("id") Integer id) {
-                return Person.builder()
-                        .id(id)
-                        .name("test")
-                        .build();
+            @GetMapping(value = "/missingServletRequestParameter")
+            public void testMissingServletRequestParameter(@RequestParam("id") Integer id) {
+            }
+
+            @PostMapping(value = "/missingServletRequestPart")
+            public void testMissingServletRequestPart(@RequestPart("file") MultipartFile file) {
+            }
+
+            @PostMapping(value = "/httpMessageNotReadable")
+            public void httpMessageNotReadable(@RequestBody Person person) {
+            }
+
+            @PostMapping(value = "/methodArgumentNotValid")
+            public void methodArgumentNotValid(@RequestBody @Validated Person person) {
+            }
+
+            @GetMapping(value = "/httpRequestMethodNotSupported")
+            public void httpRequestMethodNotSupported() {
+            }
+
+            @PostMapping(value = "/httpMediaType", produces = MediaType.APPLICATION_JSON_VALUE)
+            public void httpMediaType(@RequestBody Person person) {
+            }
+
+            @GetMapping(value = "/runtimeException")
+            public void throwsRuntimeException() {
+                throw new RuntimeException("error");
             }
         }
     }
@@ -121,7 +214,9 @@ class GlobalResponseEntityExceptionHandlerTest {
     @NoArgsConstructor
     @Builder
     static class Person {
+        @NotNull(message = "id必填")
         private Integer id;
+        @NotBlank(message = "name必填")
         private String name;
     }
 }
