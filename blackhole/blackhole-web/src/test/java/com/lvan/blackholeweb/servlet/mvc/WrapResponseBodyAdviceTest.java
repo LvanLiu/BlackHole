@@ -118,7 +118,7 @@ class WrapResponseBodyAdviceTest {
 
         // For manual testing
         static void main(String[] args) {
-            SpringApplication.run(GlobalResponseEntityExceptionHandlerTest.MiniApplication.class, args);
+            SpringApplication.run(WrapResponseBodyAdviceTest.MiniApplication.class, args);
         }
 
         @WrapperResult

@@ -61,6 +61,11 @@
             </dependency>
             <dependency>
                 <groupId>com.lvan</groupId>
+                <artifactId>blackhole-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lvan</groupId>
                 <artifactId>blackhole-web</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -124,11 +129,6 @@
 
     <!--所有模块都用到的依赖-->
     <dependencies>
-        <dependency>
-            <groupId>com.lvan</groupId>
-            <artifactId>blackhole-core</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
