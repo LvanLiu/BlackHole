@@ -2,6 +2,7 @@ package com.lvan.blackholecore.validation;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.lvan.blackholecore.validation.constraints.Enum;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.ConstraintValidator;

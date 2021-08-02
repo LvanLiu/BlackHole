@@ -1,6 +1,7 @@
 package com.lvan.blackholecore.validation;
 
 import cn.hutool.json.JSONUtil;
+import com.lvan.blackholecore.validation.constraints.Enum;
 import com.lvan.blackholetest.MinimalWebConfiguration;
 import com.lvan.blackholetest.MockMvcEasyBuilder;
 import lombok.*;

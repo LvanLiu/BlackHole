@@ -1,4 +1,6 @@
-package com.lvan.blackholecore.validation;
+package com.lvan.blackholecore.validation.constraints;
+
+import com.lvan.blackholecore.validation.EnumValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
