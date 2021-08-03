@@ -52,8 +52,8 @@ class ConstraintValidatorTest {
                 .build();
 
         mockMvc.perform(post("/person")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(JSONUtil.toJsonStr(person)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JSONUtil.toJsonStr(person)))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
@@ -67,23 +67,8 @@ class ConstraintValidatorTest {
                 .build();
 
         mockMvc.perform(post("/student")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(JSONUtil.toJsonStr(student)))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest());
-    }
-
-    @Test
-    void enumValidator_whenMethodIsBlank_validFailed() throws Exception {
-
-        User user = User.builder()
-                .id(1)
-                .name("name")
-                .sex(1)
-                .build();
-
-        mockMvc.perform(post("/user")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(JSONUtil.toJsonStr(user)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JSONUtil.toJsonStr(student)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
@@ -104,8 +89,8 @@ class ConstraintValidatorTest {
                 .build();
 
         mockMvc.perform(post("/person")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(JSONUtil.toJsonStr(person)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JSONUtil.toJsonStr(person)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
@@ -135,10 +120,6 @@ class ConstraintValidatorTest {
             @PostMapping(value = "student")
             public void addStudent(@RequestBody @Validated Student student) {
             }
-
-            @PostMapping(value = "user")
-            public void addUser(@RequestBody @Validated User user) {
-            }
         }
     }
 
@@ -152,7 +133,7 @@ class ConstraintValidatorTest {
         private Integer id;
         @NotBlank(message = "name必填")
         private String name;
-        @Enum(target = Sex.class, method = "getCode")
+        @Enum(target = Sex.class)
         private Integer sex;
 
         @Valid
@@ -169,21 +150,7 @@ class ConstraintValidatorTest {
         private Integer id;
         @NotBlank(message = "name必填")
         private String name;
-        @Enum(target = Empty.class, method = "")
-        private Integer sex;
-    }
-
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Builder
-    @EqualsAndHashCode
-    static class User {
-        @NotNull(message = "id必填")
-        private Integer id;
-        @NotBlank(message = "name必填")
-        private String name;
-        @Enum(target = Sex.class, method = "")
+        @Enum(target = Empty.class)
         private Integer sex;
     }
 

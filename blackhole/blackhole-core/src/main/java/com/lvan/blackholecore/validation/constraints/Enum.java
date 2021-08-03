@@ -29,11 +29,6 @@ public @interface Enum {
     Class<?> target();
 
     /**
-     * 获取枚举值方法
-     */
-    String method();
-
-    /**
      * 错误信息
      */
     String message() default "invalid value";
