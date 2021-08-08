@@ -23,6 +23,7 @@
         <org.apache.commons-pool2.version>2.8.0</org.apache.commons-pool2.version>
         <cn.hutool.version>5.7.3</cn.hutool.version>
         <org.apache.skywalking.version>8.6.0</org.apache.skywalking.version>
+        <micrometer-jvm-extras.version>0.2.2</micrometer-jvm-extras.version>
     </properties>
 
     <dependencyManagement>
@@ -58,6 +59,11 @@
                 <groupId>org.apache.skywalking</groupId>
                 <artifactId>apm-toolkit-trace</artifactId>
                 <version>${org.apache.skywalking.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.mweirauch</groupId>
+                <artifactId>micrometer-jvm-extras</artifactId>
+                <version>${micrometer-jvm-extras.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.lvan</groupId>
@@ -117,6 +123,11 @@
             <dependency>
                 <groupId>com.lvan</groupId>
                 <artifactId>blackhole-starter-skywalking</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lvan</groupId>
+                <artifactId>blackhole-starter-prometheus</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

@@ -27,6 +27,7 @@
         <module>starters/blackhole-starter-mybatis</module>
         <module>starters/blackhole-starter-redis</module>
         <module>starters/blackhole-starter-skywalking</module>
+        <module>starters/blackhole-starter-prometheus</module>
         <module>starters/blackhore-starter-test</module>
     </modules>
 
