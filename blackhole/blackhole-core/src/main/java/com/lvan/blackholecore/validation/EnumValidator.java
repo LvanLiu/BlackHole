@@ -1,12 +1,12 @@
 package com.lvan.blackholecore.validation;
 
 import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.util.StrUtil;
+import com.lvan.blackholecore.util.EnumPlusUtil;
+import com.lvan.blackholecore.validation.constraints.Enum;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.lang.reflect.Method;
 
 /**
  * @author Lvan
@@ -20,14 +20,12 @@ public class EnumValidator implements ConstraintValidator<Enum, Object> {
      */
     private Class<?> enumClass;
     private Object[] enumConstants;
-    private String methodName;
 
     @Override
     public void initialize(Enum constraintAnnotation) {
 
         enumClass = constraintAnnotation.target();
         enumConstants = enumClass.getEnumConstants();
-        methodName = constraintAnnotation.method();
     }
 
     @Override
@@ -43,23 +41,7 @@ public class EnumValidator implements ConstraintValidator<Enum, Object> {
             return false;
         }
 
-        //方法名为空，那么就获取不到枚举值，这种情况就没法校验，直接
-        if (StrUtil.isBlank(methodName)) {
-            log.warn("{}中没有指定method或者method为空", enumClass.getName());
-            return false;
-        }
-
-        try {
-            Method method = enumClass.getMethod(methodName);
-            for (Object obj : enumConstants) {
-                Object tmp = method.invoke(obj);
-                if (value.equals(tmp)) {
-                    return true;
-                }
-            }
-        } catch (Exception ex) {
-            log.error("获取枚举值失败", ex);
-        }
-        return false;
+        return EnumPlusUtil.likeContains(enumClass, value);
     }
+
 }
