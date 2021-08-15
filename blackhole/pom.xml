@@ -17,6 +17,7 @@
         <module>blackhole-web</module>
         <module>blackhole-mybatis</module>
         <module>blackhole-test</module>
+        <module>blackhole-validation</module>
 
         <module>blackhore-autoconfig/blackhore-autoconfig-web</module>
 

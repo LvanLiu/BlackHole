@@ -17,6 +17,8 @@
         <module>blackhole-eureka-server-sample</module>
         <module>blackhole-spring-cloud-service-provider</module>
         <module>blackhore-spring-cloud-service-consumer</module>
+        <module>blackhole-web-sample</module>
+        <module>blackhole-prometheus-sample</module>
     </modules>
 
     <dependencyManagement>

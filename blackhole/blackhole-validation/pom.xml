@@ -8,12 +8,17 @@
         <version>1.0.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>blackhole-core</artifactId>
+
+    <artifactId>blackhole-validation</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.lvan</groupId>
+            <artifactId>blackhole-core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.lvan</groupId>
