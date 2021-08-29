@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 
 /**
- * Api返回结果，对于成功的情况，需要包装多一层返回信息。
+ * Api返回结果，对于请求处理成功的情况，需要包装多一层返回信息。
  *
  * @author Lvan
  * @since 2021/7/31

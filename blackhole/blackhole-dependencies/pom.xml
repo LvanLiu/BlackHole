@@ -77,6 +77,11 @@
             </dependency>
             <dependency>
                 <groupId>com.lvan</groupId>
+                <artifactId>blackhole-aop</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lvan</groupId>
                 <artifactId>blackhole-test</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -107,6 +112,11 @@
             </dependency>
             <dependency>
                 <groupId>com.lvan</groupId>
+                <artifactId>blackhole-autoconfig-aop</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lvan</groupId>
                 <artifactId>blackhore-starter-msql</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -133,6 +143,11 @@
             <dependency>
                 <groupId>com.lvan</groupId>
                 <artifactId>blackhole-starter-prometheus</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lvan</groupId>
+                <artifactId>blackhole-starter-aop</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

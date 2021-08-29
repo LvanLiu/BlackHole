@@ -5,7 +5,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 /**
- * 快速构建MockMvc
+ * it is easy to build mock mvc
  *
  * @author Lvan
  * @since 2021/7/30

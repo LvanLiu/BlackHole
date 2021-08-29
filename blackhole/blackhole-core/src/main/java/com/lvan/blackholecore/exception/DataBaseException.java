@@ -1,7 +1,7 @@
 package com.lvan.blackholecore.exception;
 
 /**
- * 是所有与数据库相关异常的基类。
+ * the base exception about database
  *
  * @author Lvan
  * @since 2021/8/1

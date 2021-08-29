@@ -5,27 +5,25 @@
 
     <parent>
         <groupId>com.lvan</groupId>
-        <artifactId>blackhole-samples</artifactId>
+        <artifactId>blackhole-parent</artifactId>
         <version>1.0.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>blackhole-web-sample</artifactId>
+    <artifactId>blackhole-autoconfig-aop</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.lvan</groupId>
-            <artifactId>blackhole-starter-web</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
         <dependency>
             <groupId>com.lvan</groupId>
-            <artifactId>blackhole-starter-aop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.lvan</groupId>
-            <artifactId>blackhore-starter-test</artifactId>
-            <scope>test</scope>
+            <artifactId>blackhole-aop</artifactId>
         </dependency>
     </dependencies>
-
 </project>

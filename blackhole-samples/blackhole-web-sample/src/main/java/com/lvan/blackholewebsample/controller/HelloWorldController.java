@@ -1,6 +1,7 @@
 package com.lvan.blackholewebsample.controller;
 
 import cn.hutool.core.map.MapUtil;
+import com.lvan.blackholeaop.log.api.EnableLogAop;
 import com.lvan.blackholeweb.servlet.mvc.WrapperResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloWorldController {
 
+    @EnableLogAop
     @WrapperResult
     @GetMapping("hello-world")
     public Object helloWorld(@RequestParam("id") Integer id) {
