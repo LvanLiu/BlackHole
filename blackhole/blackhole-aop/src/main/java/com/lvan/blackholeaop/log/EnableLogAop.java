@@ -1,4 +1,4 @@
-package com.lvan.blackholeaop.log.api;
+package com.lvan.blackholeaop.log;
 
 import lombok.Getter;
 
@@ -19,10 +19,10 @@ public @interface EnableLogAop {
     /**
      * switch to control logging
      */
-    RecordSwitch[] recordSwitch() default RecordSwitch.ALL;
+    RecordLogSwitch[] recordSwitch() default RecordLogSwitch.ALL;
 
     @Getter
-    enum RecordSwitch {
+    enum RecordLogSwitch {
         BEFORE, AFTER_RETURNING, AFTER_THROWING, ALL, NONE;
     }
 }
