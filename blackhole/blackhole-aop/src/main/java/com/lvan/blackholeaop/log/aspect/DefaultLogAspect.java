@@ -1,6 +1,6 @@
 package com.lvan.blackholeaop.log.aspect;
 
-import com.lvan.blackholeaop.log.support.ControllerLogRecord;
+import com.lvan.blackholeaop.log.support.LogRecord;
 import com.lvan.blackholeaop.log.support.DefaultLogRecord;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.Aspect;
@@ -20,7 +20,7 @@ public class DefaultLogAspect extends AbstractLogAspect {
         super(new DefaultLogRecord());
     }
 
-    public DefaultLogAspect(ControllerLogRecord controllerLogRecord) {
+    public DefaultLogAspect(LogRecord controllerLogRecord) {
         super(controllerLogRecord);
     }
 

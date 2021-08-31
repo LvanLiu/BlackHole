@@ -15,10 +15,10 @@ import java.lang.reflect.Method;
 public class LogAspectContext {
 
     private final LogAop.RecordLogSwitch[] recordLogSwitches;
+    private final JoinPoint logJoinPoint;
+
     private Boolean recordAllLog;
     private Boolean recordNothing;
-
-    private JoinPoint logJoinPoint;
 
     public LogAspectContext(final JoinPoint logJoinPoint) {
 
@@ -36,21 +36,21 @@ public class LogAspectContext {
 
     public boolean isRecordAllLog() {
 
-        if (ObjectUtil.isNotNull(recordAllLog)) {
-            return recordAllLog;
+        if (ObjectUtil.isNull(recordAllLog)) {
+            //缓存起来，避免每次都处理这一块
+            recordAllLog = ArrayUtil.contains(recordLogSwitches, LogAop.RecordLogSwitch.ALL);
         }
 
-        recordAllLog = ArrayUtil.contains(recordLogSwitches, LogAop.RecordLogSwitch.ALL);
         return recordAllLog;
     }
 
     public boolean isRecordNothing() {
 
-        if (ObjectUtil.isNotNull(recordNothing)) {
-            return recordNothing;
+        if (ObjectUtil.isNull(recordNothing)) {
+            //缓存起来，避免每次都处理这一块
+            recordNothing = ArrayUtil.contains(recordLogSwitches, LogAop.RecordLogSwitch.NONE);
         }
 
-        recordNothing = ArrayUtil.contains(recordLogSwitches, LogAop.RecordLogSwitch.NONE);
         return recordNothing;
     }
 
