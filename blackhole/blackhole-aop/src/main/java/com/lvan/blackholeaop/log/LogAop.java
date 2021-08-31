@@ -11,10 +11,10 @@ import java.lang.annotation.*;
  * @since 2021/8/16
  */
 @Documented
-@Target(value = {ElementType.METHOD})
+@Target(value = {ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
-public @interface EnableLogAop {
+public @interface LogAop {
 
     /**
      * switch to control logging

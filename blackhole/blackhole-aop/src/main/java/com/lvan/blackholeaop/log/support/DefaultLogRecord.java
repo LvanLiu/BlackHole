@@ -1,6 +1,6 @@
 package com.lvan.blackholeaop.log.support;
 
-import com.lvan.blackholeaop.log.EnableLogAop;
+import com.lvan.blackholeaop.log.LogAop;
 import com.lvan.blackholeaop.log.aspect.LogAspectContext;
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,7 +13,7 @@ public class DefaultLogRecord extends AbstractLogRecord {
 
     @Override
     public void recordBeforeAdvice(LogAspectContext context) {
-        if (!context.isEnableRecordSwitch(EnableLogAop.RecordLogSwitch.BEFORE)) {
+        if (!context.isEnableRecordSwitch(LogAop.RecordLogSwitch.BEFORE)) {
             return;
         }
 

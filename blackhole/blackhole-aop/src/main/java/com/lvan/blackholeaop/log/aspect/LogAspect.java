@@ -32,13 +32,13 @@ public class LogAspect {
         this.controllerLogRecord = controllerLogRecord;
     }
 
-    @Pointcut("@annotation(com.lvan.blackholeaop.log.EnableLogAop)")
+    @Pointcut("@annotation(com.lvan.blackholeaop.log.LogAop) || @within(com.lvan.blackholeaop.log.LogAop)")
     public void pointCut() {
     }
 
     @Around("pointCut()")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
-
+        log.info("test");
         LogAspectContext logAspectContext = new LogAspectContext(joinPoint);
         controllerLogRecord.recordBeforeAdvice(logAspectContext);
         try {

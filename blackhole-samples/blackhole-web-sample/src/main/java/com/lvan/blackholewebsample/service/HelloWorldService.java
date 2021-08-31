@@ -1,7 +1,7 @@
 package com.lvan.blackholewebsample.service;
 
 import cn.hutool.core.map.MapUtil;
-import com.lvan.blackholeaop.log.EnableLogAop;
+import com.lvan.blackholeaop.log.LogAop;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class HelloWorldService {
 
-    @EnableLogAop
+//    @LogAop
     public Object helloWorld(Integer id) {
         return MapUtil.of("id", 1);
     }

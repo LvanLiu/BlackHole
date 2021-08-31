@@ -2,7 +2,7 @@ package com.lvan.blackholeaop.log.aspect;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.lvan.blackholeaop.log.EnableLogAop;
+import com.lvan.blackholeaop.log.LogAop;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
@@ -14,7 +14,7 @@ import java.lang.reflect.Method;
  */
 public class LogAspectContext {
 
-    private final EnableLogAop.RecordLogSwitch[] recordLogSwitches;
+    private final LogAop.RecordLogSwitch[] recordLogSwitches;
     private Boolean recordAllLog;
     private Boolean recordNothing;
 
@@ -23,15 +23,15 @@ public class LogAspectContext {
     public LogAspectContext(final JoinPoint logJoinPoint) {
 
         this.logJoinPoint = logJoinPoint;
-        EnableLogAop enableLogAop = acquireEnableLogAopAnnotation(logJoinPoint);
-        this.recordLogSwitches = enableLogAop.recordSwitch();
+        LogAop logAop = acquireEnableLogAopAnnotation(logJoinPoint);
+        this.recordLogSwitches = logAop.recordSwitch();
     }
 
-    private EnableLogAop acquireEnableLogAopAnnotation(final JoinPoint joinPoint) {
+    private LogAop acquireEnableLogAopAnnotation(final JoinPoint joinPoint) {
 
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();
-        return method.getAnnotation(EnableLogAop.class);
+        return method.getAnnotation(LogAop.class);
     }
 
     public boolean isRecordAllLog() {
@@ -40,7 +40,7 @@ public class LogAspectContext {
             return recordAllLog;
         }
 
-        recordAllLog = ArrayUtil.contains(recordLogSwitches, EnableLogAop.RecordLogSwitch.ALL);
+        recordAllLog = ArrayUtil.contains(recordLogSwitches, LogAop.RecordLogSwitch.ALL);
         return recordAllLog;
     }
 
@@ -50,11 +50,11 @@ public class LogAspectContext {
             return recordNothing;
         }
 
-        recordNothing = ArrayUtil.contains(recordLogSwitches, EnableLogAop.RecordLogSwitch.NONE);
+        recordNothing = ArrayUtil.contains(recordLogSwitches, LogAop.RecordLogSwitch.NONE);
         return recordNothing;
     }
 
-    public boolean isEnableRecordSwitch(final EnableLogAop.RecordLogSwitch expectRecordSwitch) {
+    public boolean isEnableRecordSwitch(final LogAop.RecordLogSwitch expectRecordSwitch) {
 
         if (isRecordAllLog()) {
             return true;
