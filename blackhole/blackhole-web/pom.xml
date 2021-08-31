@@ -27,6 +27,10 @@
         </dependency>
         <dependency>
             <groupId>com.lvan</groupId>
+            <artifactId>blackhole-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.lvan</groupId>
             <artifactId>blackhore-starter-test</artifactId>
             <scope>test</scope>
         </dependency>

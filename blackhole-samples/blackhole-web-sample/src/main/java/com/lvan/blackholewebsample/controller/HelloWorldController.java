@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Lvan
  * @since 2021/7/25
  */
-//@LogAop
 @RequestMapping("demo")
 @RestController
 public class HelloWorldController {
