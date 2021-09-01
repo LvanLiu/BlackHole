@@ -1,5 +1,6 @@
 package com.lvan.blackholeaop.log.support;
 
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
 import com.lvan.blackholeaop.log.aspect.LogAspectContext;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,10 @@ public class DefaultLogRecord extends AbstractLogRecord {
 
     @Override
     protected void outPutLogAfterReturnAdvice(LogAspectContext context, Object response) {
+        if (ObjectUtil.isNull(response)) {
+            return;
+        }
+
         log.info("method return:{}", JSONUtil.toJsonStr(response));
     }
 

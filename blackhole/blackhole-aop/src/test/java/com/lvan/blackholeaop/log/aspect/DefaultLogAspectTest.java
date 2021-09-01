@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.aop.aspectj.annotation.AspectJProxyFactory;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -22,13 +21,14 @@ class DefaultLogAspectTest {
 
     @Mock
     private DefaultLogRecord logRecord;
-
     private UserService userService;
 
     @BeforeEach
     void setUp() {
 
-        doNothing().when(logRecord).recordBeforeAdvice(any(LogAspectContext.class));
+
+        doNothing().when(logRecord).recordBeforeAdvice(any());
+        doNothing().when(logRecord).recordAfterReturnAdvice(any(), any());
 
         AspectJProxyFactory aspectJProxyFactory = new AspectJProxyFactory(new UserService());
         DefaultLogAspect logAspect = new DefaultLogAspect(logRecord);
@@ -38,19 +38,18 @@ class DefaultLogAspectTest {
     }
 
     @Test
-    void testDefaultLogAspect() {
+    void recordLogAroundMethod_whenNoneOfExceptionThrows_thenRecordBeforeAndAfterReturn() {
 
-        String userName = userService.getUserName(1);
+        userService.getUserName();
 
-        assertThat(userName).isNotEmpty();
-        verify(logRecord, times(1)).recordBeforeAdvice(any(LogAspectContext.class));
+        verify(logRecord, times(1)).recordBeforeAdvice(any());
+        verify(logRecord, times(1)).recordAfterReturnAdvice(any(), any());
     }
 
     public static class UserService {
 
         @LogAop
-        public String getUserName(Integer userId) {
-            return "lvan";
+        public void getUserName() {
         }
     }
 }
