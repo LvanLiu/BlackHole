@@ -14,10 +14,10 @@ public abstract class AbstractLogAspect {
 
     @Getter
     @Setter
-    private LogRecord controllerLogRecord;
+    private LogRecord logRecord;
 
-    public AbstractLogAspect(LogRecord controllerLogRecord) {
-        this.controllerLogRecord = controllerLogRecord;
+    public AbstractLogAspect(LogRecord logRecord) {
+        this.logRecord = logRecord;
     }
 
     protected void pointCut() {
@@ -27,14 +27,14 @@ public abstract class AbstractLogAspect {
     public Object recordLogAroundMethod(ProceedingJoinPoint joinPoint) throws Throwable {
 
         LogAspectContext logAspectContext = new LogAspectContext(joinPoint);
-        controllerLogRecord.recordBeforeAdvice(logAspectContext);
+        logRecord.recordBeforeAdvice(logAspectContext);
 
         try {
             Object responseBody = joinPoint.proceed();
-            controllerLogRecord.recordAfterReturnAdvice(logAspectContext, responseBody);
+            logRecord.recordAfterReturnAdvice(logAspectContext, responseBody);
             return responseBody;
         } catch (Throwable e) {
-            controllerLogRecord.recordAfterThrowAdvice(logAspectContext, e);
+            logRecord.recordAfterThrowAdvice(logAspectContext, e);
             throw e;
         }
     }

@@ -19,5 +19,10 @@
             <groupId>com.lvan</groupId>
             <artifactId>blackhole-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.lvan</groupId>
+            <artifactId>blackhore-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>
