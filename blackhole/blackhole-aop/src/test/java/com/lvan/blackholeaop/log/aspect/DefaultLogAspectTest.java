@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.aop.aspectj.annotation.AspectJProxyFactory;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -26,9 +27,7 @@ class DefaultLogAspectTest {
     @BeforeEach
     void setUp() {
 
-
         doNothing().when(logRecord).recordBeforeAdvice(any());
-        doNothing().when(logRecord).recordAfterReturnAdvice(any(), any());
 
         AspectJProxyFactory aspectJProxyFactory = new AspectJProxyFactory(new UserService());
         DefaultLogAspect logAspect = new DefaultLogAspect(logRecord);
@@ -40,16 +39,36 @@ class DefaultLogAspectTest {
     @Test
     void recordLogAroundMethod_whenNoneOfExceptionThrows_thenRecordBeforeAndAfterReturn() {
 
+        doNothing().when(logRecord).recordAfterReturnAdvice(any(), any());
+
         userService.getUserName();
 
         verify(logRecord, times(1)).recordBeforeAdvice(any());
         verify(logRecord, times(1)).recordAfterReturnAdvice(any(), any());
     }
 
+    @Test
+    void recordLogAroundMethod_whenThrowsException_thenRecordBeforeAndAfterException() {
+
+        doNothing().when(logRecord).recordAfterThrowAdvice(any(), any());
+
+        assertThrows(IllegalStateException.class, () -> {
+            userService.getUserPhone();
+        });
+
+        verify(logRecord, times(1)).recordBeforeAdvice(any());
+        verify(logRecord, times(1)).recordAfterThrowAdvice(any(), any());
+    }
+
     public static class UserService {
 
         @LogAop
         public void getUserName() {
+        }
+
+        @LogAop
+        public void getUserPhone() {
+            throw new IllegalStateException();
         }
     }
 }

@@ -16,7 +16,7 @@ public abstract class AbstractLogAspect {
     @Setter
     private LogRecord logRecord;
 
-    public AbstractLogAspect(LogRecord logRecord) {
+    protected AbstractLogAspect(LogRecord logRecord) {
         this.logRecord = logRecord;
     }
 
