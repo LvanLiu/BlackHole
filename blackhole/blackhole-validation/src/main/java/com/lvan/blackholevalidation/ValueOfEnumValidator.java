@@ -27,6 +27,21 @@ public class ValueOfEnumValidator implements ConstraintValidator<ValueOfEnum, Ob
     private Method method;
 
     @Override
+    public void initialize(ValueOfEnum constraintAnnotation) {
+
+        this.enumConstants = Stream.of(constraintAnnotation.enumClass().getEnumConstants())
+                .collect(Collectors.toList());
+
+        try {
+            this.method = acquireValueOfEnumMethodProperty(constraintAnnotation);
+        } catch (NoSuchMethodException e) {
+            log.error("failed to getMethod", e);
+            throw new ValidationException(StrUtil.format("failed to getMethod from enumClass. method:{} enumClass:{}",
+                    constraintAnnotation.method(), constraintAnnotation.enumClass().getCanonicalName()));
+        }
+    }
+
+    @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
 
         //该校验器不负责值为空的校验，返回true，这样可以传递给其他校验器校验。
@@ -48,19 +63,12 @@ public class ValueOfEnumValidator implements ConstraintValidator<ValueOfEnum, Ob
         return false;
     }
 
-    @Override
-    public void initialize(ValueOfEnum constraintAnnotation) {
-        this.enumConstants = Stream.of(constraintAnnotation.enumClass().getEnumConstants())
-                .collect(Collectors.toList());
+    private Method acquireValueOfEnumMethodProperty(ValueOfEnum constraintAnnotation) throws NoSuchMethodException {
 
-        if (StrUtil.isNotBlank(constraintAnnotation.method())) {
-            try {
-                this.method = constraintAnnotation.enumClass().getMethod(constraintAnnotation.method());
-            } catch (NoSuchMethodException e) {
-                log.error("failed to getMethod", e);
-                throw new ValidationException(StrUtil.format("failed to getMethod from enumClass. method:{} enumClass:{}",
-                        constraintAnnotation.method(), constraintAnnotation.enumClass().getCanonicalName()));
-            }
+        if (StrUtil.isBlank(constraintAnnotation.method())) {
+            return null;
         }
+
+        return constraintAnnotation.enumClass().getMethod(constraintAnnotation.method());
     }
 }

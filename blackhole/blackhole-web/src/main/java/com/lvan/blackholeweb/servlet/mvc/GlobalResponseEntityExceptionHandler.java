@@ -37,9 +37,6 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalResponseEntityExceptionHandler {
 
-    /**
-     * 处理缺失请求参数异常。
-     */
     @ExceptionHandler({
             MissingServletRequestParameterException.class,
             MissingServletRequestPartException.class,
@@ -69,9 +66,6 @@ public class GlobalResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, errorDetail, null, HttpStatus.BAD_REQUEST);
     }
 
-    /**
-     * 处理不支持此Http请求方法异常。
-     */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     protected ResponseEntity<ErrorDetail> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex) {
 
@@ -85,9 +79,6 @@ public class GlobalResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, errorDetail, headers, HttpStatus.METHOD_NOT_ALLOWED);
     }
 
-    /**
-     * 处理不支持Http media type异常
-     */
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
     protected ResponseEntity<ErrorDetail> handleHttpMediaTypeNotSupported(
             HttpMediaTypeNotSupportedException ex, WebRequest request) {
@@ -108,9 +99,6 @@ public class GlobalResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, errorDetail, headers, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
     }
 
-    /**
-     * 处理不接受http media type异常
-     */
     @ExceptionHandler(HttpMediaTypeNotAcceptableException.class)
     protected ResponseEntity<ErrorDetail> handleHttpMediaTypeNotAcceptable(HttpMediaTypeNotAcceptableException ex) {
 
@@ -124,14 +112,6 @@ public class GlobalResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, errorDetail, null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    /**
-     * 统一自定义全局异常响应报文。
-     *
-     * @param ex      异常
-     * @param body    响应正文
-     * @param headers 响应http header
-     * @param status  http状态
-     */
     protected ResponseEntity<ErrorDetail> handleExceptionInternal(
             Exception ex, ErrorDetail body, HttpHeaders headers, HttpStatus status) {
 
