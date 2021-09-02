@@ -19,11 +19,14 @@ public class DefaultLogRecord extends AbstractLogRecord {
 
     @Override
     protected void outPutLogAfterReturnAdvice(LogAspectContext context, Object response) {
-        if (ObjectUtil.isNull(response)) {
-            return;
-        }
 
-        log.info("method return:{}", JSONUtil.toJsonStr(response));
+        String responseMsg;
+        if (ObjectUtil.isNull(response)) {
+            responseMsg = "null";
+        } else {
+            responseMsg = JSONUtil.toJsonStr(response);
+        }
+        log.info("method return:{}", responseMsg);
     }
 
     @Override
