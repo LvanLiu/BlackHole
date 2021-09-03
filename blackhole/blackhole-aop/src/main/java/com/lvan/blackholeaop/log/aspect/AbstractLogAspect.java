@@ -1,5 +1,6 @@
 package com.lvan.blackholeaop.log.aspect;
 
+import com.lvan.blackholeaop.log.context.LogAopContext;
 import com.lvan.blackholeaop.log.support.LogRecord;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,16 +27,18 @@ public abstract class AbstractLogAspect {
     @Around("pointCut()")
     public Object recordLogAroundMethod(ProceedingJoinPoint joinPoint) throws Throwable {
 
-        LogAspectContext logAspectContext = new LogAspectContext(joinPoint);
-        logRecord.recordBeforeAdvice(logAspectContext);
+        LogAopContext logAopContext = acquireLogAopContext();
+        logRecord.recordBeforeAdvice(logAopContext);
 
         try {
             Object responseBody = joinPoint.proceed();
-            logRecord.recordAfterReturnAdvice(logAspectContext, responseBody);
+            logRecord.recordAfterReturnAdvice(logAopContext, responseBody);
             return responseBody;
         } catch (Throwable e) {
-            logRecord.recordAfterThrowAdvice(logAspectContext, e);
+            logRecord.recordAfterThrowAdvice(logAopContext, e);
             throw e;
         }
     }
+
+    protected abstract LogAopContext acquireLogAopContext();
 }

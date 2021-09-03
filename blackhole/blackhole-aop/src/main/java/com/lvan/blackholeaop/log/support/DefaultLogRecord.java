@@ -2,7 +2,7 @@ package com.lvan.blackholeaop.log.support;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
-import com.lvan.blackholeaop.log.aspect.LogAspectContext;
+import com.lvan.blackholeaop.log.context.LogAspectContext;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -14,7 +14,7 @@ public class DefaultLogRecord extends AbstractLogRecord {
 
     @Override
     protected void outPutLogBeforeAdvice(LogAspectContext context) {
-        log.info("method args:{}", context.getArgs());
+        log.info("method args:{}", context.acquireArgs());
     }
 
     @Override

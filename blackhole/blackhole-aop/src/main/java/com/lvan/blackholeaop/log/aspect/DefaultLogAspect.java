@@ -1,8 +1,7 @@
 package com.lvan.blackholeaop.log.aspect;
 
-import com.lvan.blackholeaop.log.support.LogRecord;
 import com.lvan.blackholeaop.log.support.DefaultLogRecord;
-import lombok.extern.slf4j.Slf4j;
+import com.lvan.blackholeaop.log.support.LogRecord;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
@@ -12,7 +11,6 @@ import org.aspectj.lang.annotation.Pointcut;
  * @author Lvan
  * @since 2021/8/16
  */
-@Slf4j
 @Aspect
 public class DefaultLogAspect extends AbstractLogAspect {
 

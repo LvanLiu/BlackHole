@@ -1,7 +1,5 @@
 package com.lvan.blackholeaop.log;
 
-import lombok.Getter;
-
 import java.lang.annotation.*;
 
 /**
@@ -20,9 +18,4 @@ public @interface LogAop {
      * switch to control logging
      */
     RecordLogSwitch[] recordSwitch() default RecordLogSwitch.ALL;
-
-    @Getter
-    enum RecordLogSwitch {
-        BEFORE, AFTER_RETURNING, AFTER_THROWING, ALL, NONE;
-    }
 }

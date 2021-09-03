@@ -1,7 +1,7 @@
 package com.lvan.blackholeaop.log.support;
 
-import com.lvan.blackholeaop.log.LogAop;
-import com.lvan.blackholeaop.log.aspect.LogAspectContext;
+import com.lvan.blackholeaop.log.RecordLogSwitch;
+import com.lvan.blackholeaop.log.context.LogAspectContext;
 
 /**
  * @author Lvan
@@ -12,7 +12,7 @@ public abstract class AbstractLogRecord implements LogRecord {
     @Override
     public void recordBeforeAdvice(LogAspectContext context) {
 
-        if (!context.isEnableRecordSwitch(LogAop.RecordLogSwitch.BEFORE)) {
+        if (context.isEnableRecordSwitch(RecordLogSwitch.BEFORE)) {
             return;
         }
         outPutLogBeforeAdvice(context);
@@ -21,7 +21,7 @@ public abstract class AbstractLogRecord implements LogRecord {
     @Override
     public void recordAfterReturnAdvice(LogAspectContext context, Object response) {
 
-        if (!context.isEnableRecordSwitch(LogAop.RecordLogSwitch.AFTER_RETURNING)) {
+        if (context.isEnableRecordSwitch(RecordLogSwitch.AFTER_RETURNING)) {
             return;
         }
 
@@ -31,7 +31,7 @@ public abstract class AbstractLogRecord implements LogRecord {
     @Override
     public void recordAfterThrowAdvice(LogAspectContext context, Throwable ex) {
 
-        if (!context.isEnableRecordSwitch(LogAop.RecordLogSwitch.AFTER_THROWING)) {
+        if (context.isEnableRecordSwitch(RecordLogSwitch.AFTER_THROWING)) {
             return;
         }
 

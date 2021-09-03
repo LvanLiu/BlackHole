@@ -1,6 +1,6 @@
 package com.lvan.blackholeaop.log.support;
 
-import com.lvan.blackholeaop.log.aspect.LogAspectContext;
+import com.lvan.blackholeaop.log.context.LogAspectContext;
 
 /**
  * record the method log api。
