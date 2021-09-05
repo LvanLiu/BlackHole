@@ -8,12 +8,15 @@ package com.lvan.blackholecore.exception;
  */
 public class DataBaseException extends BlackHoleException {
 
-    private static final long serialVersionUID = 1623286962808809807L;
-
     public DataBaseException() {
+        super();
     }
 
     public DataBaseException(String message) {
         super(message);
+    }
+
+    public DataBaseException(String template, Object... params) {
+        super(template, params);
     }
 }

@@ -1,3 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.lvan.blackhoreautoconfigweb.RestTemplateConfiguration, \
-  com.lvan.blackhoreautoconfigweb.ControllerAdviceConfig
+  com.lvan.blackhoreautoconfigweb.ControllerAdviceConfig, \
+  com.lvan.blackhoreautoconfigweb.WebLogAspectConfig

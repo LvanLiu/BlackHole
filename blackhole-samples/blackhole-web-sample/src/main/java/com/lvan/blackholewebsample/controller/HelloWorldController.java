@@ -1,6 +1,6 @@
 package com.lvan.blackholewebsample.controller;
 
-import com.lvan.blackholeaop.log.LogAop;
+import com.lvan.blackholeweb.log.LogAop;
 import com.lvan.blackholeweb.servlet.mvc.WrapperResult;
 import com.lvan.blackholewebsample.service.HelloWorldService;
 import org.springframework.beans.factory.annotation.Autowired;

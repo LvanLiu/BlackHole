@@ -1,7 +1,8 @@
 package com.lvan.blackholecore.exception;
 
+import cn.hutool.core.util.StrUtil;
+
 /**
- *
  * Runtime exception that is the superclass of all BlackHole exceptions.
  *
  * @author Lvan
@@ -16,5 +17,9 @@ public class BlackHoleException extends RuntimeException {
 
     public BlackHoleException(String message) {
         super(message);
+    }
+
+    public BlackHoleException(String template, Object... params) {
+        super(StrUtil.format(template, params));
     }
 }

@@ -21,7 +21,6 @@
         <module>blackhole-aop</module>
 
         <module>blackhore-autoconfig/blackhore-autoconfig-web</module>
-        <module>blackhore-autoconfig/blackhole-autoconfig-aop</module>
 
         <module>starters/blackhole-starter-web</module>
         <module>starters/blackhole-starter-spring-cloud-eureka-server</module>
@@ -31,7 +30,6 @@
         <module>starters/blackhole-starter-redis</module>
         <module>starters/blackhole-starter-skywalking</module>
         <module>starters/blackhole-starter-prometheus</module>
-        <module>starters/blackhole-starter-aop</module>
         <module>starters/blackhore-starter-test</module>
     </modules>
 

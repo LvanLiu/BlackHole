@@ -19,10 +19,6 @@
         </dependency>
         <dependency>
             <groupId>com.lvan</groupId>
-            <artifactId>blackhole-starter-aop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.lvan</groupId>
             <artifactId>blackhore-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
