@@ -24,6 +24,7 @@
         <cn.hutool.version>5.7.3</cn.hutool.version>
         <org.apache.skywalking.version>8.6.0</org.apache.skywalking.version>
         <micrometer-jvm-extras.version>0.2.2</micrometer-jvm-extras.version>
+        <knife4j.version>2.0.7</knife4j.version>
     </properties>
 
     <dependencyManagement>
@@ -64,6 +65,11 @@
                 <groupId>io.github.mweirauch</groupId>
                 <artifactId>micrometer-jvm-extras</artifactId>
                 <version>${micrometer-jvm-extras.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.lvan</groupId>
@@ -112,6 +118,11 @@
             </dependency>
             <dependency>
                 <groupId>com.lvan</groupId>
+                <artifactId>blackhole-autoconfig-knife4j</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lvan</groupId>
                 <artifactId>blackhore-starter-msql</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -138,6 +149,11 @@
             <dependency>
                 <groupId>com.lvan</groupId>
                 <artifactId>blackhole-starter-prometheus</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lvan</groupId>
+                <artifactId>blackhole-starter-knife4j</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
