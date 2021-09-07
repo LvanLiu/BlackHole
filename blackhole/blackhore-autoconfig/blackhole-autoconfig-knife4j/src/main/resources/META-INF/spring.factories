@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.lvan.blackholeautoconfig.knife4j.Knife4jConfiguration
