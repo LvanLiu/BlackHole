@@ -1,5 +1,6 @@
 package com.lvan.blackholeautoconfig.knife4j;
 
+import cn.hutool.core.util.ObjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -8,11 +9,10 @@ import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
-
-import java.util.Objects;
 
 /**
  * @author lvan
@@ -41,12 +41,18 @@ public class Knife4jConfiguration {
 
     private ApiInfo apiInfo() {
 
+        Knife4jProperties.ApiInfo apiInfo =
+                ObjectUtil.defaultIfNull(knife4jProperties.getApiInfo(), Knife4jProperties.ApiInfo.acquireDefaultApiInfo());
+        Knife4jProperties.Contact myContact =
+                ObjectUtil.defaultIfNull(apiInfo.getContact(), Knife4jProperties.Contact.acquireDefaultContact());
+
+        Contact contact = new Contact(myContact.getName(), myContact.getUrl(), myContact.getEmail());
         return new ApiInfoBuilder()
-                .title(knife4jProperties.getApiInfo().getTitle())
-                .description(knife4jProperties.getApiInfo().getDescription())
-                .termsOfServiceUrl(knife4jProperties.getApiInfo().getTermsOfServiceUrl())
-                .version(knife4jProperties.getApiInfo().getVersion())
-                .contact(knife4jProperties.getApiInfo().getContact())
+                .title(apiInfo.getTitle())
+                .description(apiInfo.getDescription())
+                .termsOfServiceUrl(apiInfo.getTermsOfServiceUrl())
+                .version(apiInfo.getVersion())
+                .contact(contact)
                 .build();
     }
 }

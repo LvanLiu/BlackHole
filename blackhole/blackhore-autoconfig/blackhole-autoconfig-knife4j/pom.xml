@@ -20,6 +20,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.lvan</groupId>
+            <artifactId>blackhole-core</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
